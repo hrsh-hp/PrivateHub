@@ -341,6 +341,24 @@ function createAnswerer(offer, peerUserName, rec_channel_name){
     return peer
 }
 
+function dcOnMessage(event){
+    var message = event.data;
+    
+    var li = document.createElement('li');
+    li.appendChild(document.createTextNode(message));
+    messageList.appendChild(li);
+}
+
+function getDataChannels(){
+    var dcs = [];
+    for (peerUserName in mapPeers){
+        console.log('mapPeers[', peerUserName, ']: ', mapPeers[peerUserName]);
+        var datachannel = mapPeers[peerUserName][1];
+        console.log('dataChannel: ', datachannel);
+        dcs.push(datachannel);
+    }
+    return dcs;
+}
 
 // get all stored RTCPeerConnections
 // peerStorageObj is an object (either mapPeers or mapScreenPeers)

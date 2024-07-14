@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +23,9 @@ TEMPLATE_DIR = Path(BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fbf%0pe0etl_hcd$lrkvgo$py07*+0cbe_pw61w)1zvj6#j+3s'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+NGROK_LINK = os.environ.get('NGROK_LINK')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,7 +38,7 @@ SECURE_SSL_REDIRECT = False #True when using additional server
 # DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 # CSRF_COOKIE_SECURE = False
 # CSRF_USE_SESSIONS = False
-CSRF_TRUSTED_ORIGINS = ["https://75a5-152-58-62-46.ngrok-free.app","http://locahost:8000"]
+CSRF_TRUSTED_ORIGINS = [NGROK_LINK,"http://locahost:8000"]
 
 # Application definition
 
@@ -63,7 +66,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://75a5-152-58-62-46.ngrok-free.app',
+    NGROK_LINK,
 ]
 
 ROOT_URLCONF = 'privatehub.urls'
@@ -147,9 +150,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATIC_URL,]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -159,5 +162,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
     "192.168.172.97",
-    "https://75a5-152-58-62-46.ngrok-free.app", 
+    NGROK_LINK, 
 ]
