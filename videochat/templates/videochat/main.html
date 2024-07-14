@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{%load static %}
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css./style.css' %}">
+        <title>Video Chat</title>
+    </head>
+
+    <body>
+
+        <h3 id="label-username">USERNAME</h3>
+        <div>
+            <input type="text" id="username">
+            <button id="btn-join">Join</button>
+        </div>
+
+        <div class="main-grid-container">
+            <div id="video-container">
+                <div><video id="local-video" style="float: left;" autoplay playinline></video></div>
+                <button id="toggle-audio">Audio Mute</button>
+                <button id="toggle-video">Video Off</button>
+            </div>
+
+            <div id="chat-container">
+                <h3>CHAT</h3>
+                <div id="messages">
+                    <ul id="message-list">
+
+                    </ul>
+                </div>
+                <div><input type="text" id="msg"><Button id="send-msg">Send</Button></div>
+                <button id="share-screen">Share Screen</button>
+            </div>
+        </div>
+    </body>
+    
+    <script src="{% static 'js/main.js' %}"></script>
+
+</html>

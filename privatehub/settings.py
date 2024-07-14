@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# STATIC_DIR = Path(BASE_DIR,'static')
+STATIC_DIR = Path(BASE_DIR,'static')
 TEMPLATE_DIR = Path(BASE_DIR,'templates')
 # MEDIA_DIR = Path(BASE_DIR,'media')
 
@@ -27,12 +27,20 @@ SECRET_KEY = 'django-insecure-fbf%0pe0etl_hcd$lrkvgo$py07*+0cbe_pw61w)1zvj6#j+3s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
+# while using Ngrok or any other server 
+ALLOWED_HOSTS = ['*']
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False #True when using additional server
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
+# CSRF_COOKIE_SECURE = False
+# CSRF_USE_SESSIONS = False
+CSRF_TRUSTED_ORIGINS = ["https://75a5-152-58-62-46.ngrok-free.app","http://locahost:8000"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +59,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://75a5-152-58-62-46.ngrok-free.app',
 ]
 
 ROOT_URLCONF = 'privatehub.urls'
@@ -73,14 +86,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'privatehub.wsgi.application'
 ASGI_APPLICATION = 'privatehub.asgi.application'
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+
+if DEBUG:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer"
+        }
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [("127.0.0.1", 6379)],
+            },
         },
-    },
-}
+    }
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -128,8 +149,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [STATIC_URL,]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "192.168.172.97",
+    "https://75a5-152-58-62-46.ngrok-free.app", 
+]
