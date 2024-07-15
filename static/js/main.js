@@ -211,7 +211,7 @@ function sendSignal(action, message){
 function createOfferer(peerUserName, rec_channel_name){
     console.log('inside offerer')
     
-    var peer = new RTCPeerConnection(null);
+    var peer = new RTCPeerConnection(servers);
     console.log('offerer peer ',peer);
     addLocalTracks(peer);
 
@@ -272,7 +272,7 @@ function createOfferer(peerUserName, rec_channel_name){
 }
 
 function createAnswerer(offer, peerUserName, rec_channel_name){
-    var peer = new RTCPeerConnection(null);
+    var peer = new RTCPeerConnection(servers);
     addLocalTracks(peer);
 
     var remoteVideo = createVideo(peerUserName);
@@ -420,7 +420,6 @@ function addLocalTracks(peer){
 
 function removeVideo(video){
     var videoWrapper = video.parentNode;
-
     videoWrapper.parentNode.removeChild(videoWrapper)
 }
 
