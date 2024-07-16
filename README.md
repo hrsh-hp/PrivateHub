@@ -4,8 +4,6 @@ This project is a basic implementation of a WebRTC video chat application using 
 
 ## Table of Contents
 
-- [PRIVATE\_HUB: WebRTC Video Chat with Django Signaling Server](#private_hub-webrtc-video-chat-with-django-signaling-server)
-  - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Requirements](#requirements)
   - [Installation](#installation)
