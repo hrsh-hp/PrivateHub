@@ -1,43 +1,34 @@
 <!DOCTYPE html>
-{%load static %}
+{% extends "base.html" %}
 
-<html lang="en">
+    {% block body %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>Video Chat</title>
-    </head>
-
-    <body>
-
-        <h3 id="label-username">USERNAME</h3>
+    <h3 id="label-username" class="text-3xl font-bold underline text-clifford">USERNAME</h3>
         <div>
             <input type="text" id="username">
             <button id="btn-join">Join</button>
         </div>
 
         <div class="main-grid-container">
-            <div id="video-container">
-                <div><video id="local-video" style="float: left;" autoplay playinline></video></div>
-                <button id="toggle-audio">Audio Mute</button>
-                <button id="toggle-video">Video Off</button>
+            <div id="video-container" class="w-max class="w-full max-w-4xl p-4 bg-white shadow-md rounded-lg"">
+                <div><video id="local-video" style="float: left;" autoplay playinline></video></div> 
             </div>
+            
 
-            <div id="chat-container">
-                <h3>CHAT</h3>
-                <div id="messages">
-                    <ul id="message-list">
-
-                    </ul>
-                </div>
-                <div><input type="text" id="msg"><Button id="send-msg">Send</Button></div>
-                <button id="share-screen">Share Screen</button>
-            </div>
+            
         </div>
-    </body>
+        <div class="inline-flex m-3 justify-center w-full">
+            <button id="toggle-audio" class="bg-red-500 hover:bg-gray-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
+                <i class="fa-solid fa-microphone-slash"></i>
+            </button>
+           
+            <button id="toggle-video" class="bg-red-500 hover:bg-gray-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
+                <i class="fa-solid fa-video-slash"></i>
+            </button>
+            <button id="hang-up" class="bg-red-500 hover:bg-gray-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full">
+                <i class="fa-solid fa-phone"></i>
+            </button>
+        </div>
+      
+    {% endblock body %}
     
-    <script src="{% static 'js/main.js' %}"></script>
-
-</html>

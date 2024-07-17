@@ -7,10 +7,10 @@ var localStream = new MediaStream();
 
 btnToggleAudio = document.getElementById('toggle-audio');    
 btnToggleVideo = document.getElementById('toggle-video');
-
-var btnSendMesg = document.getElementById('send-msg');
-var msgInput = document.getElementById('msg')
-var messageList = document.getElementById('message-list');
+var hangUp = document.getElementById('hang-up');
+// var btnSendMesg = document.getElementById('send-msg');
+// var msgInput = document.getElementById('msg')
+// var messageList = document.getElementById('message-list');
 
 var loc = window.location;
 var wsStart = 'ws://'
@@ -67,9 +67,15 @@ joinBtn.onclick = ()=>{
         console.log("error occured", e);
     }
 
-    btnSendMesg.disabled = false;
-    msgInput.disabled = false;
+    // btnSendMesg.disabled = false;
+    // msgInput.disabled = false;
 
+}
+
+
+hangUp.onclick = ()=>{
+    ws.close();
+    location.reload();
 }
 
 function webSocketOnMessage(event){
@@ -118,7 +124,7 @@ function webSocketOnMessage(event){
     }
 }
 
-btnSendMesg.onclick = sendMsgOnClick;
+// btnSendMesg.onclick = sendMsgOnClick;
 
 function sendMsgOnClick(){
     var message = msgInput.value;
@@ -169,22 +175,22 @@ var userMedia = navigator.mediaDevices.getUserMedia(constaints)
             audioTracks[0].enabled = !audioTracks[0].enabled;
 
             if(audioTracks[0].enabled){
-                btnToggleAudio.innerHTML = "Audio Mute";
+                btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone-slash"></i>`;
                 return;
             }
     
-            btnToggleAudio.innerHTML = "Audio Unmute";
+            btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
     
         };
         btnToggleVideo.onclick = function(){
             videoTracks[0].enabled = !videoTracks[0].enabled;
 
             if(videoTracks[0].enabled){
-                btnToggleVideo.innerHTML = "Video Off";
+                btnToggleVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`;
                 return;
             }
     
-            btnToggleVideo.innerHTML = "Video On";
+            btnToggleVideo.innerHTML = `<i class="fa-solid fa-video"></i>`;
     
         };
 
@@ -211,7 +217,7 @@ function sendSignal(action, message){
 function createOfferer(peerUserName, rec_channel_name){
     console.log('inside offerer')
     
-    var peer = new RTCPeerConnection(servers);
+    var peer = new RTCPeerConnection({});
     console.log('offerer peer ',peer);
     addLocalTracks(peer);
 
@@ -272,7 +278,7 @@ function createOfferer(peerUserName, rec_channel_name){
 }
 
 function createAnswerer(offer, peerUserName, rec_channel_name){
-    var peer = new RTCPeerConnection(servers);
+    var peer = new RTCPeerConnection({});
     addLocalTracks(peer);
 
     var remoteVideo = createVideo(peerUserName);
@@ -379,6 +385,7 @@ function createVideo(peerUserName){
     var videoContainer = document.getElementById('video-container');
     
     var remoteVideo = document.createElement('video');
+    remoteVideo.classList.add();
     remoteVideo.id = peerUserName + '-video'
     remoteVideo.autoplay = true
     remoteVideo.playsInline = true
@@ -387,6 +394,14 @@ function createVideo(peerUserName){
     var videoWrapper = document.createElement('div');
     videoContainer.appendChild(videoWrapper);
     videoWrapper.appendChild(remoteVideo);
+    
+    var numberOfVideos = videoContainer.children.length;
+    if (numberOfVideos > 4) {
+        videoContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(200px, 1fr))`;
+    }
+    else{
+        videoContainer.style.gridTemplateColumns = `repeat(${numberOfVideos}, minmax(0, 1fr))`;
+    }
     
     return remoteVideo;
 }
