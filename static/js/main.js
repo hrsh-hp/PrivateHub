@@ -175,22 +175,28 @@ var userMedia = navigator.mediaDevices.getUserMedia(constaints)
             audioTracks[0].enabled = !audioTracks[0].enabled;
 
             if(audioTracks[0].enabled){
-                btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone-slash"></i>`;
+                btnToggleAudio.classList.remove("bg-gray-500","hover:bg-gray-600");
+                btnToggleAudio.classList.add("bg-red-500","hover:bg-red-600");
+                btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
                 return;
             }
-    
-            btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
+            btnToggleAudio.classList.remove("bg-red-500","hover:bg-red-600");
+            btnToggleAudio.classList.add("bg-gray-500","hover:bg-gray-600");
+            btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone-slash"></i>`;
     
         };
         btnToggleVideo.onclick = function(){
             videoTracks[0].enabled = !videoTracks[0].enabled;
 
             if(videoTracks[0].enabled){
-                btnToggleVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`;
+                btnToggleVideo.classList.remove("bg-gray-500","hover:bg-gray-600");
+                btnToggleVideo.classList.add("bg-red-500","hover:bg-red-600");
+                btnToggleVideo.innerHTML = `<i class="fa-solid fa-video"></i>`;
                 return;
             }
-    
-            btnToggleVideo.innerHTML = `<i class="fa-solid fa-video"></i>`;
+            btnToggleVideo.classList.remove("bg-red-500","hover:bg-red-600");
+            btnToggleVideo.classList.add("bg-gray-500","hover:bg-gray-600");
+            btnToggleVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`;
     
         };
 
