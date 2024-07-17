@@ -155,5 +155,5 @@ Extensive logging is added throughout the code to assist in debugging. Check the
 
 ## Contributing
 
-If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome. And if you like my work don't hesitate to give a star 🌟.
 
