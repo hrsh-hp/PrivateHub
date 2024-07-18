@@ -1,9 +1,10 @@
 // console.log('hey')
 
 var mapPeers = {};
-const localVideo = document.getElementById('local-video');    
+// const localVideo = document.getElementById('local-video');    
 var localStream = new MediaStream();
-
+var room = JSON.parse(document.getElementById('room').textContent);
+console.log(room)
 
 btnToggleAudio = document.getElementById('toggle-audio');    
 btnToggleVideo = document.getElementById('toggle-video');
@@ -18,7 +19,7 @@ var wsStart = 'ws://'
 if(loc.protocol == 'https:'){
     wsStart = 'wss://'
 }
-var wsEndPoint = wsStart + loc.host + "/ws/";
+var wsEndPoint = wsStart + loc.host + "/ws/" + room + '/';
 var ws;
 
 var inputUsername = document.getElementById('username');
@@ -35,17 +36,17 @@ var servers = {
 };  
 
 
-joinBtn.onclick = ()=>{
-    userName = inputUsername.value;
-    if(userName == ''){
-        return;
-    }
-    inputUsername.value = '';
-    inputUsername.disabled = true;
-    inputUsername.style.visibility = 'hidden';
 
-    joinBtn.disabled = true;
-    joinBtn.style.visibility = 'hidden';
+    var userName = Math.floor(Math.random() * 100).toString();
+    // if(userName == ''){
+    //     return;
+    // }
+    // inputUsername.value = '';
+    // inputUsername.disabled = true;
+    // inputUsername.style.visibility = 'hidden';
+
+    // joinBtn.disabled = true;
+    // joinBtn.style.visibility = 'hidden';
 
     var labelUsername = document.getElementById('label-username');
     labelUsername.innerHTML = userName;
@@ -53,6 +54,9 @@ joinBtn.onclick = ()=>{
     // console.log(wsEndPoint);
     ws = new WebSocket(wsEndPoint);
     
+    hangUp.classList.remove('hidden');
+    hangUp.classList.add('flex');
+
     ws.onopen = function(e){
         console.log('Connection opened',e);
         sendSignal('new-peer',{});
@@ -70,12 +74,13 @@ joinBtn.onclick = ()=>{
     // btnSendMesg.disabled = false;
     // msgInput.disabled = false;
 
-}
 
 
 hangUp.onclick = ()=>{
-    ws.close();
-    location.reload();
+        ws.close();
+        hangUp.classList.remove('flex');
+        hangUp.classList.add('hidden');
+        window.location.href = "/";
 }
 
 function webSocketOnMessage(event){
@@ -145,65 +150,9 @@ function sendMsgOnClick(){
 
 }
 
-const constaints = {
-    'video' :true,
-    'audio':true
-}
 
-var userMedia = navigator.mediaDevices.getUserMedia(constaints)
-    .then(stream => {
-        localStream = stream;
-        console.log('Got MediaStream:', stream);
-        var mediaTracks = stream.getTracks();
-        
-        for(i=0; i < mediaTracks.length; i++){
-            console.log(mediaTracks[i]);
-        }
 
-        localVideo.srcObject = localStream;
-        localVideo.muted = true;
 
-        window.stream = stream; 
-
-        var audioTracks =stream.getAudioTracks();
-        var videoTracks = stream.getVideoTracks();
-
-        audioTracks[0].enabled = true;
-        videoTracks[0].enabled = true;
-
-        btnToggleAudio.onclick = function(){
-            audioTracks[0].enabled = !audioTracks[0].enabled;
-
-            if(audioTracks[0].enabled){
-                btnToggleAudio.classList.remove("bg-gray-500","hover:bg-gray-600");
-                btnToggleAudio.classList.add("bg-red-500","hover:bg-red-600");
-                btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
-                return;
-            }
-            btnToggleAudio.classList.remove("bg-red-500","hover:bg-red-600");
-            btnToggleAudio.classList.add("bg-gray-500","hover:bg-gray-600");
-            btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone-slash"></i>`;
-    
-        };
-        btnToggleVideo.onclick = function(){
-            videoTracks[0].enabled = !videoTracks[0].enabled;
-
-            if(videoTracks[0].enabled){
-                btnToggleVideo.classList.remove("bg-gray-500","hover:bg-gray-600");
-                btnToggleVideo.classList.add("bg-red-500","hover:bg-red-600");
-                btnToggleVideo.innerHTML = `<i class="fa-solid fa-video"></i>`;
-                return;
-            }
-            btnToggleVideo.classList.remove("bg-red-500","hover:bg-red-600");
-            btnToggleVideo.classList.add("bg-gray-500","hover:bg-gray-600");
-            btnToggleVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`;
-    
-        };
-
-    })
-    .catch(error =>{
-        console.log('error in accesing media devices', error)
-    });
 
 
 function sendSignal(action, message){
@@ -402,12 +351,12 @@ function createVideo(peerUserName){
     videoWrapper.appendChild(remoteVideo);
     
     var numberOfVideos = videoContainer.children.length;
-    if (numberOfVideos > 4) {
-        videoContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(200px, 1fr))`;
-    }
-    else{
-        videoContainer.style.gridTemplateColumns = `repeat(${numberOfVideos}, minmax(0, 1fr))`;
-    }
+    // if (numberOfVideos > 4) {
+    //     videoContainer.style.gridTemplateColumns = `repeat(auto-fill, minmax(200px, 1fr))`;
+    // }
+    // else{
+    //     videoContainer.style.gridTemplateColumns = `repeat(${numberOfVideos}, minmax(0, 1fr))`;
+    // }
     
     return remoteVideo;
 }

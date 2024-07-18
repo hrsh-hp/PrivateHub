@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load static %}
 
     {% block body %}
 
     <h3 id="label-username" class="text-3xl font-bold underline text-clifford">USERNAME</h3>
-        <div>
-            <input type="text" id="username">
-            <button id="btn-join">Join</button>
-        </div>
+    <h3 id="" class="text-3xl font-bold underline text-clifford">{{room}}</h3>
+
 
         <div class="main-grid-container">
             <div id="video-container" class="w-max class="w-full max-w-4xl p-4 bg-white shadow-md rounded-lg"">
@@ -17,7 +16,7 @@
 
             
         </div>
-        <div class="inline-flex m-3 justify-center w-full">
+        <div class="inline-flex mt-3 justify-center w-full">
             <button id="toggle-audio" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
                 <i class="fa-solid fa-microphone"></i>
             </button>
@@ -25,10 +24,18 @@
             <button id="toggle-video" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
                 <i class="fa-solid fa-video"></i>
             </button>
-            <button id="hang-up" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full">
+            <button id="hang-up" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 hidden items-center justify-center rounded-full">
                 <i class="fa-solid fa-phone"></i>
             </button>
         </div>
-      
+        {{ room|json_script:"room" }}
+
     {% endblock body %}
+
+    {% block script %}
     
+    <script src="{% static 'js/localvideo.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+        
+    {% endblock script %}
+

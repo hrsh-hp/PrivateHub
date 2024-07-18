@@ -1,6 +1,58 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% load static %}
 
 {% block body %}
-  
+    <div class="h-screen flex flex-col">
+        <div>
+            <h3 class="text-3xl font-bold underline text-clifford">PrivateHub</h3>
+        </div>
+        
+        <div class="flex content-center	items-center justify-center " style="height:inherit;">
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <p>Check your video and audio</p>
+                </div>
+
+                <a href="">
+                    <video id="local-video" autoplay playinline class="p-2 rounded"></video>
+                </a>
+                <div class="p-3 pt-1">
+                    <div class="inline-flex m-3 justify-center w-full">
+                        <button id="toggle-audio" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        
+                        <button id="toggle-video" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
+                            <i class="fa-solid fa-video"></i>
+                        </button>
+                        
+                    </div>
+                    
+                    <div>
+                        <form action="{% url 'main_view' %}" method="post">
+                            {% csrf_token %}
+                            <div class="flex">
+                                <input type="text" id="room" name="room" placeholder="Room name...">
+                                <button type="submit" id="btn-join" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Join
+                                </button>
+                            </div>
+                            
+                        </form>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock body %}
+
+{% block script %}
+<!-- <script src="{% static 'js/main.js' %}"></script> -->
+<script src="{% static 'js/localvideo.js' %}"></script>
+  
+{% endblock script %}
+
