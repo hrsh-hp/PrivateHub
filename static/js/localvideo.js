@@ -38,11 +38,13 @@ var userMedia = navigator.mediaDevices.getUserMedia(constaints)
                 btnToggleAudio.classList.remove("bg-gray-500","hover:bg-gray-600");
                 btnToggleAudio.classList.add("bg-red-500","hover:bg-red-600");
                 btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
+                btnToggleAudio.title = "Mute";
                 return;
             }
             btnToggleAudio.classList.remove("bg-red-500","hover:bg-red-600");
             btnToggleAudio.classList.add("bg-gray-500","hover:bg-gray-600");
             btnToggleAudio.innerHTML = `<i class="fa-solid fa-microphone-slash"></i>`;
+            btnToggleAudio.title = "Unmute";
     
         };
         btnToggleVideo.onclick = function(){
@@ -52,11 +54,13 @@ var userMedia = navigator.mediaDevices.getUserMedia(constaints)
                 btnToggleVideo.classList.remove("bg-gray-500","hover:bg-gray-600");
                 btnToggleVideo.classList.add("bg-red-500","hover:bg-red-600");
                 btnToggleVideo.innerHTML = `<i class="fa-solid fa-video"></i>`;
+                btnToggleVideo.title = "Video Off";
                 return;
             }
             btnToggleVideo.classList.remove("bg-red-500","hover:bg-red-600");
             btnToggleVideo.classList.add("bg-gray-500","hover:bg-gray-600");
             btnToggleVideo.innerHTML = `<i class="fa-solid fa-video-slash"></i>`;
+            btnToggleVideo.title = "Video On";
     
         };
 

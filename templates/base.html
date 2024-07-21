@@ -15,12 +15,17 @@
       
     {% endblock style %}
 </head>
-<body class="w-fit">
-    
-    {% block body %}
-      
-    {% endblock body%}
+<body class="">
+    <div class="h-screen flex flex-col">
+        
+        <div class="bg-black p-4">
+            <h3 class="text-3xl font-bold text-yellow-400 underline">PrivateHub</h3>
+        </div>
 
+        {% block body %}
+        
+        {% endblock body%}
+    </div>
 
     {% block script %}
       

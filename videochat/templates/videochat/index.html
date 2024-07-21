@@ -3,10 +3,7 @@
 {% load static %}
 
 {% block body %}
-    <div class="h-screen flex flex-col">
-        <div>
-            <h3 class="text-3xl font-bold underline text-clifford">PrivateHub</h3>
-        </div>
+    
         
         <div class="flex content-center	items-center justify-center " style="height:inherit;">
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -19,11 +16,11 @@
                 </a>
                 <div class="p-3 pt-1">
                     <div class="inline-flex m-3 justify-center w-full">
-                        <button id="toggle-audio" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
+                        <button id="toggle-audio" title="Mute" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fa-solid fa-microphone"></i>
                         </button>
                         
-                        <button id="toggle-video" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
+                        <button id="toggle-video" title="Video Off" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fa-solid fa-video"></i>
                         </button>
                         
@@ -32,10 +29,16 @@
                     <div>
                         <form action="{% url 'main_view' %}" method="post">
                             {% csrf_token %}
+
                             <div class="flex">
-                                <input type="text" id="room" name="room" placeholder="Room name...">
-                                <button type="submit" id="btn-join" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <input type="text" id="room" name="room" placeholder="Room name..." required>
+                                <button type="submit" id="btn-join" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                     Join
+                                </button>
+                            </div>
+                            <div>
+                                <button type="submit" id="btn-create" class="w-full mt-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                    Create Instant Meet <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
                             
@@ -46,7 +49,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 {% endblock body %}
 

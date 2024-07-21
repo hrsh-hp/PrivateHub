@@ -4,14 +4,14 @@ from django.shortcuts import render
 def main_view(request):
     
     global room 
-    
+    room = 'Test'
     if request.method == "POST":
         room = request.POST['room']
         
     if room:
         context = {'room' : room }
     else:
-        context = {'room' : 'Test'}
+        context = {'room' : room }
     return render(request, 'videochat/main.html',context)
 
 
