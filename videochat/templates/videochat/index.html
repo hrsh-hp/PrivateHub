@@ -29,21 +29,22 @@
                     <div>
                         <form action="{% url 'main_view' %}" method="post">
                             {% csrf_token %}
+                            <input type="hidden" id="action" name="action" value="">
+
+                            <div>
+                                <button type="button" id="btn-create" onclick="setAction('create')" class="w-full mb-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                    Create Instant Meet <i class="fa-solid fa-play mx-3"></i>
+                                </button>
+                            </div>
 
                             <div class="flex">
                                 <input type="text" id="room" name="room" placeholder="Room name..." required>
-                                <button type="submit" id="btn-join" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                <button type="button" id="btn-join" onclick="setAction('join')" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                     Join
-                                </button>
-                            </div>
-                            <div>
-                                <button type="submit" id="btn-create" class="w-full mt-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                                    Create Instant Meet <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
                             
                         </form>
-
                         
                     </div>
                 </div>
@@ -54,6 +55,12 @@
 {% endblock body %}
 
 {% block script %}
+<script>
+    function setAction(action) {
+        document.getElementById('action').value = action;
+        document.querySelector('form').submit();
+    }
+</script>
 <!-- <script src="{% static 'js/main.js' %}"></script> -->
 <script src="{% static 'js/localvideo.js' %}"></script>
   

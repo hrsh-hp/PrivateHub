@@ -7,7 +7,11 @@
         <div>
 
             <h3 id="label-username" class="text-3xl font-bold underline text-clifford">USERNAME</h3>
-            <h3 id="" class="text-3xl font-bold underline text-clifford">{{room}}</h3>
+            <div class="">
+                <p class="awg awv ban">
+                    
+                </p>
+            </div>
 
 
             <div class="main-grid-container">
@@ -19,17 +23,26 @@
 
         </div>
             
-        <div class="inline-flex mt-3 justify-center w-full">
-            <button id="toggle-audio" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
-                <i class="fa-solid fa-microphone"></i>
-            </button>
-           
-            <button id="toggle-video" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
-                <i class="fa-solid fa-video"></i>
-            </button>
-            <button id="hang-up" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 hidden items-center justify-center rounded-full">
-                <i class="fa-solid fa-phone"></i>
-            </button>
+        <div class="flex mt-3 justify-center w-full">
+            <div id="roomname" class="fixed bottom-4 left-4 bg-gray-900 text-white py-2 px-4 rounded-full shadow-lg flex items-center space-x-2">
+                <span class="font-bold">{{room}}</span>
+                <span class="fa-regular fa-copy"></span>
+            </div> 
+
+            <div class="inline-flex ">
+                <button id="toggle-audio" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+               
+                <button id="toggle-video" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 flex items-center justify-center rounded-full mr-4">
+                    <i class="fa-solid fa-video"></i>
+                </button>
+                <button id="hang-up" class="bg-red-500 hover:bg-red-600 text-white font-bold w-16 h-16 hidden items-center justify-center rounded-full">
+                    <i class="fa-solid fa-phone"></i>
+                </button>
+            </div>
+            
+ 
         </div>
 
     </div>
@@ -40,6 +53,20 @@
 
     {% block script %}
     
+    <script>
+        const roomName = document.getElementById('roomname');
+        roomName.addEventListener('click',()=>{
+            const content = roomName.innerText || roomName.textContent
+
+            navigator.clipboard.writeText(content).then(() => {
+                alert('Room name copied to clipboard');
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }) ;
+
+    </script>
+
     <script src="{% static 'js/localvideo.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
         

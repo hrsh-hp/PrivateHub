@@ -49,14 +49,14 @@ button:hover {
 .main-grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    /* gap: 20px; */
 }
 
 #video-container {
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 
 @media screen and (max-width: 435px) {
