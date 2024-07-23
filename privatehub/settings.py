@@ -44,6 +44,7 @@ CSRF_TRUSTED_ORIGINS = [NGROK_LINK,"http://locahost:8000"]
 
 INSTALLED_APPS = [
     'corsheaders',
+    'rest_framework',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'videochat',
+    'authentication',
 ]
 
 MIDDLEWARE = [
