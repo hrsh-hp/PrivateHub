@@ -5,4 +5,5 @@ def login_view(request):
     pass
 
 def register(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'register.html')
