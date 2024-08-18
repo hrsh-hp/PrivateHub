@@ -43,6 +43,7 @@ CSRF_TRUSTED_ORIGINS = [NGROK_LINK,"http://locahost:8000"]
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework_simplejwt',
     'corsheaders',
     'rest_framework',
     'daphne',
