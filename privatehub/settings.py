@@ -36,14 +36,15 @@ ALLOWED_HOSTS = ['*']
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = False #True when using additional server
 # DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
-# CSRF_COOKIE_SECURE = False
-# CSRF_USE_SESSIONS = False
+CSRF_COOKIE_SECURE = False
+CSRF_USE_SESSIONS = False
 CSRF_TRUSTED_ORIGINS = [NGROK_LINK,"http://locahost:8000"]
 
 # Application definition
 
 INSTALLED_APPS = [
     'corsheaders',
+    'rest_framework',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'videochat',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 ROOT_URLCONF = 'privatehub.urls'
+AUTH_USER_MODEL = 'authentication.CustomUser'
 
 TEMPLATES = [
     {

@@ -54,8 +54,8 @@ var servers = {
     // console.log(wsEndPoint);
     ws = new WebSocket(wsEndPoint);
     
-    hangUp.classList.remove('hidden');
-    hangUp.classList.add('flex');
+    hangUp.classList.remove('d-none');
+    hangUp.classList.add('d-flex');
 
     ws.onopen = function(e){
         console.log('Connection opened',e);
@@ -78,8 +78,8 @@ var servers = {
 
 hangUp.onclick = ()=>{
         ws.close();
-        hangUp.classList.remove('flex');
-        hangUp.classList.add('hidden');
+        hangUp.classList.remove('d-flex');
+        hangUp.classList.add('d-none');
         window.location.href = "/";
 }
 
@@ -172,7 +172,7 @@ function sendSignal(action, message){
 function createOfferer(peerUserName, rec_channel_name){
     console.log('inside offerer')
     
-    var peer = new RTCPeerConnection({});
+    var peer = new RTCPeerConnection({servers});
     console.log('offerer peer ',peer);
     addLocalTracks(peer);
 
@@ -233,7 +233,7 @@ function createOfferer(peerUserName, rec_channel_name){
 }
 
 function createAnswerer(offer, peerUserName, rec_channel_name){
-    var peer = new RTCPeerConnection({});
+    var peer = new RTCPeerConnection({servers});
     addLocalTracks(peer);
 
     var remoteVideo = createVideo(peerUserName);

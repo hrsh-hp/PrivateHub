@@ -5,51 +5,49 @@
 {% block body %}
     
         
-        <div class="flex content-center	items-center justify-center " style="height:inherit;">
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <p>Check your video and audio</p>
-                </div>
-
-                <a href="">
-                    <video id="local-video" autoplay playinline class="p-2 rounded"></video>
-                </a>
-                <div class="p-3 pt-1">
-                    <div class="inline-flex m-3 justify-center w-full">
-                        <button id="toggle-audio" title="Mute" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                            <i class="fa-solid fa-microphone"></i>
-                        </button>
-                        
-                        <button id="toggle-video" title="Video Off" class="bg-red-500 hover:bg-red-600 text-white font-bold w-12 h-12 flex items-center justify-center rounded-full mr-4">
-                            <i class="fa-solid fa-video"></i>
-                        </button>
-                        
-                    </div>
-                    
-                    <div>
-                        <form action="{% url 'main_view' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" id="action" name="action" value="">
-
-                            <div>
-                                <button type="button" id="btn-create" onclick="setAction('create')" class="w-full mb-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                                    Create Instant Meet <i class="fa-solid fa-play mx-3"></i>
-                                </button>
-                            </div>
-
-                            <div class="flex">
-                                <input type="text" id="room" name="room" placeholder="Room name..." required>
-                                <button type="button" id="btn-join" onclick="setAction('join')" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                                    Join
-                                </button>
-                            </div>
-                            
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="card shadow-sm" style="max-width: 24rem;">
+        <div class="card-header text-center bg-light text-dark">
+            <p class="mb-0">Check your video and audio</p>
         </div>
+
+        <div class="p-2">
+            <video id="local-video" autoplay playsinline class="w-100 rounded"></video>
+        </div>
+
+        <div class="card-body">
+            <div class="d-flex justify-content-center mb-4">
+                <button id="toggle-audio" title="Mute" class="btn btn-danger btn-lg rounded-circle me-3">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                
+                <button id="toggle-video" title="Video Off" class="btn btn-danger btn-lg rounded-circle">
+                    <i class="fas fa-video"></i>
+                </button>
+            </div>
+
+            <form action="{% url 'main_view' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" id="action" name="action" value="">
+
+                <div class="mb-3">
+                    <button type="button" id="btn-create" onclick="setAction('create')" class="btn btn-dark btn-block">
+                        Create Instant Meet <i class="fas fa-play ms-2"></i>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="room" name="room" placeholder="Room name..." required class="form-control" aria-label="Room name">
+                    <button type="button" id="btn-join" onclick="setAction('join')" class="btn btn-outline-dark">
+                        Join
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 {% endblock body %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    
+    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+        <div class="text-center mb-4">
+            <img class="mb-4" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" height="50">
+            <h2 class="h4 mb-4">Sign in to your account</h2>
+        </div>
+
+        <div class="w-100" style="max-width: 360px;">
+            <form class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label for="password" class="form-label">Password</label>
+                        <a href="#" class="text-decoration-none">Forgot password?</a>
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback">
+                        Please provide a password.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                </div>
+            </form>
+
+            <p class="text-center mt-4">
+                Not a member? <a href="#" class="text-decoration-none">Start a 14 day free trial</a>
+            </p>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{% endblock script %}
